@@ -70,7 +70,7 @@ export default function DangerPage() {
             justifyContent: 'center', margin: '0 auto 20px'
           }}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
+              <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f0a1a', marginBottom: '8px' }}>
@@ -108,10 +108,9 @@ export default function DangerPage() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {[
-                  'Your profile, name, bio, and avatar',
                   'Access to all TrexaSoft products (TrexaFlow, TrexaMeet, etc.)',
                   'All data associated with your account across every product',
-                  'Your login credentials — you will be signed out immediately'
+                  'Your login credentials - you will be signed out immediately'
                 ].map(item => (
                   <li key={item} style={{
                     display: 'flex', alignItems: 'flex-start', gap: '10px',
@@ -316,8 +315,8 @@ export default function DangerPage() {
                 {step === 'deleting' ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ animation: 'spin 0.8s linear infinite' }}>
-                      <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3"/>
-                      <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                      <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
+                      <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round" />
                     </svg>
                     Deleting…
                   </>

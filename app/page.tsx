@@ -168,7 +168,7 @@ export default function HomePage() {
 
           {/* Tagline */}
           <h1 style={{
-            fontSize: 'clamp(2.5rem, 6vw, 2.5rem)',
+            fontSize: 'clamp(2rem, 6vw, 2.5rem)',
             fontWeight: 800, lineHeight: 1.1,
             letterSpacing: '-0.04em', color: '#0f0a1a',
             marginBottom: '24px', maxWidth: '800px'

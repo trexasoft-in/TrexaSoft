@@ -130,14 +130,12 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
           gap: '10px',
         }}
       >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="TrexaSoft logo">
-            <rect width="32" height="32" rx="8" fill="#9D00FF" />
-            <path d="M8 10h16M16 10v12M11 16h10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span style={{ fontWeight: 700, fontSize: '15px', color: '#0f0a1a', letterSpacing: '-0.3px' }}>
-            TrexaSoft
-          </span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img
+            src="/trexasoft_text_purple.png"
+            alt="TrexaSoft Logo"
+            style={{ height: '32px', width: 'auto' }}
+          />
         </Link>
       </div>
 
@@ -317,12 +315,12 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
         }}
         className="mobile-header"
       >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#9D00FF" />
-            <path d="M8 10h16M16 10v12M11 16h10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span style={{ fontWeight: 700, fontSize: '14px', color: '#0f0a1a' }}>TrexaSoft</span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img
+            src="/trexasoft_text_purple.png"
+            alt="TrexaSoft Logo"
+            style={{ height: '28px', width: 'auto' }}
+          />
         </Link>
 
         <button

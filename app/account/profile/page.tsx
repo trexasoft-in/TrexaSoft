@@ -9,8 +9,7 @@ import {
   X,
   Camera,
   Mail,
-  User2,
-  FileText
+  User2
 } from 'lucide-react'
 import { auth_api } from '@/lib/auth_api'
 import { use_auth_store } from '@/lib/store'
@@ -436,11 +435,7 @@ export default function ProfilePage() {
               label="Email address"
               value={user?.email || 'Not available'}
             />
-            <InfoRow
-              icon={<FileText size={16} />}
-              label="Bio"
-              value={profile.bio?.trim() ? profile.bio : 'No bio added yet'}
-            />
+
           </div>
         </div>
 
@@ -622,27 +617,7 @@ export default function ProfilePage() {
               />
             </Field>
 
-            <Field
-              label="Bio"
-              hint="Add a short description about yourself."
-              id="bio"
-            >
-              <textarea
-                id="bio"
-                name="bio"
-                rows={4}
-                value={editing ? draft.bio : profile.bio}
-                onChange={handle_change}
-                disabled={!editing || loading}
-                placeholder="Tell us a bit about yourself"
-                style={{
-                  ...input_style(!editing || loading),
-                  resize: 'vertical',
-                  minHeight: '104px',
-                  lineHeight: 1.6,
-                }}
-              />
-            </Field>
+
 
             <Field
               label="Email"

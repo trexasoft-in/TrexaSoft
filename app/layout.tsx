@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'TrexaSoft Account',
+  title: 'TrexaSoft',
   description: 'Manage your TrexaSoft account — one account for all TrexaSoft products.',
 }
 
