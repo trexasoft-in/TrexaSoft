@@ -67,7 +67,13 @@ function VerifyEmailForm() {
         set_otp(['', '', '', '', '', ''])
         inputs.current[0]?.focus()
       } else {
-        router.push('/auth/login?verified=true')
+        const params = new URLSearchParams(window.location.search)
+        const returnTo = params.get('returnTo')
+        const next = new URLSearchParams({ verified: 'true' })
+
+        if (returnTo) next.set('returnTo', returnTo)
+
+        router.push(`/auth/login?${next.toString()}`)
       }
     } catch {
       set_error('Unable to connect. Please try again.')

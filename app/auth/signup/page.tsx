@@ -36,7 +36,13 @@ export default function SignupPage() {
       if (res.error || res.message?.toLowerCase().includes('error')) {
         set_error(res.error || res.message || 'Something went wrong.')
       } else {
-        router.push(`/auth/verify-email?email=${encodeURIComponent(form.email)}`)
+        const params = new URLSearchParams(window.location.search)
+        const returnTo = params.get('returnTo')
+        const next = new URLSearchParams({ email: form.email })
+
+        if (returnTo) next.set('returnTo', returnTo)
+
+        router.push(`/auth/verify-email?${next.toString()}`)
       }
     } catch {
       set_error('Unable to connect. Please try again.')

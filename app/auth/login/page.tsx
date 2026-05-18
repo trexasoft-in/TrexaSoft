@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { auth_api } from '@/lib/auth_api'
 import { use_auth_store } from '@/lib/store'
+import { redirectAfterAuth } from '@/lib/auth-redirect'
 
 function LoginForm() {
   const router = useRouter()
@@ -47,7 +48,19 @@ function LoginForm() {
       } else {
         const me = await auth_api.get_me(res.access_token)
         set_auth(me.user || me, res.access_token, res.refresh_token)
-        router.push('/account/profile')
+        
+        const user = me?.user || {
+          userid: res?.user?.userid || res?.user?.id,
+          name: res?.user?.name,
+          email: res?.user?.email,
+        }
+
+        redirectAfterAuth({
+          accessToken: res.access_token,
+          refreshToken: res.refresh_token,
+          user,
+          fallbackPath: '/account/profile',
+        })
       }
     } catch {
       set_error('Unable to connect. Please try again.')

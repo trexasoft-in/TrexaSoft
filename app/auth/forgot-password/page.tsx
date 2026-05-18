@@ -198,7 +198,15 @@ export default function ForgotPasswordPage() {
               </div>
 
               <button
-                onClick={() => router.push(`/auth/reset-password?email=${encodeURIComponent(email)}`)}
+                onClick={() => {
+                  const params = new URLSearchParams(window.location.search)
+                  const returnTo = params.get('returnTo')
+                  const next = new URLSearchParams({ email })
+
+                  if (returnTo) next.set('returnTo', returnTo)
+
+                  router.push(`/auth/reset-password?${next.toString()}`)
+                }}
                 style={{
                   width: '100%', display: 'flex', alignItems: 'center',
                   justifyContent: 'center', gap: '8px',
