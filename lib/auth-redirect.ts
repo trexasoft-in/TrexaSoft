@@ -29,7 +29,9 @@ export function redirectAfterAuth(payload: AuthPayload) {
   }
 
   if (payload.user?.userid || payload.user?.id) {
-    url.searchParams.set('userid', payload.user.userid || payload.user.id || '');
+    const id = payload.user.userid || payload.user.id || '';
+    url.searchParams.set('userid', id);
+    url.searchParams.set('userId', id);
   }
 
   if (payload.user?.name) {
