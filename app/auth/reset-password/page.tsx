@@ -94,11 +94,11 @@ function ResetPasswordForm() {
       {/* ICON */}
       <div style={{
         width: '52px', height: '52px', borderRadius: '14px',
-        background: '#f3e6ff', display: 'flex', alignItems: 'center',
+        background: '#f5f5f5', display: 'flex', alignItems: 'center',
         justifyContent: 'center', marginBottom: '24px'
       }}>
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9D00FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
       </div>
 
@@ -155,19 +155,19 @@ function ResetPasswordForm() {
                 style={{
                   width: '100%', aspectRatio: '1',
                   textAlign: 'center', fontSize: '22px', fontWeight: 700,
-                  border: `1.5px solid ${digit ? '#9D00FF' : 'rgba(157,0,255,0.2)'}`,
+                  border: `1.5px solid ${digit ? '#111111' : 'rgba(0,0,0,0.16)'}`,
                   borderRadius: '10px', color: '#0f0a1a',
                   background: digit ? '#faf3ff' : '#ffffff',
-                  outline: 'none', caretColor: '#9D00FF',
+                  outline: 'none', caretColor: '#111111',
                   transition: 'border-color 0.15s, background 0.15s, box-shadow 0.15s'
                 }}
                 onFocus={e => {
-                  e.target.style.borderColor = '#9D00FF'
+                  e.target.style.borderColor = '#111111'
                   e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
                 }}
                 onBlur={e => {
                   e.target.style.boxShadow = 'none'
-                  if (!digit) e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                  if (!digit) e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                 }}
               />
             ))}
@@ -190,17 +190,17 @@ function ResetPasswordForm() {
               required
               style={{
                 width: '100%', padding: '11px 44px 11px 14px',
-                border: '1px solid rgba(157,0,255,0.2)',
+                border: '1px solid rgba(0,0,0,0.16)',
                 borderRadius: '9px', fontSize: '15px',
                 color: '#0f0a1a', background: '#ffffff',
                 outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
               }}
               onFocus={e => {
-                e.target.style.borderColor = '#9D00FF'
+                e.target.style.borderColor = '#111111'
                 e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
               }}
               onBlur={e => {
-                e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                 e.target.style.boxShadow = 'none'
               }}
             />
@@ -243,7 +243,7 @@ function ResetPasswordForm() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <label htmlFor="confirm" style={{ fontSize: '13px', fontWeight: 600, color: '#0f0a1a' }}>
             Confirm new password
-              </label>
+          </label>
           <div style={{ position: 'relative' }}>
             <input
               id="confirm"
@@ -255,7 +255,7 @@ function ResetPasswordForm() {
               required
               style={{
                 width: '100%', padding: '11px 44px 11px 14px',
-                border: `1px solid ${passwords_mismatch ? 'rgba(225,29,72,0.4)' : passwords_match ? 'rgba(22,163,74,0.4)' : 'rgba(157,0,255,0.2)'}`,
+                border: `1px solid ${passwords_mismatch ? 'rgba(225,29,72,0.4)' : passwords_match ? 'rgba(22,163,74,0.4)' : 'rgba(0,0,0,0.16)'}`,
                 borderRadius: '9px', fontSize: '15px',
                 color: '#0f0a1a', background: '#ffffff',
                 outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
@@ -300,11 +300,11 @@ function ResetPasswordForm() {
           style={{
             width: '100%', display: 'flex', alignItems: 'center',
             justifyContent: 'center', gap: '8px',
-            background: loading ? '#c97dff' : '#9D00FF',
+            background: loading ? '#666666' : '#111111',
             color: '#ffffff', fontSize: '15px', fontWeight: 600,
             padding: '13px', borderRadius: '10px', border: 'none',
             cursor: loading ? 'not-allowed' : 'pointer',
-            boxShadow: '0 4px 16px rgba(157,0,255,0.2)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
             transition: 'opacity 0.15s'
           }}
           onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '0.9' }}
@@ -313,8 +313,8 @@ function ResetPasswordForm() {
           {loading ? (
             <>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ animation: 'spin 0.8s linear infinite' }}>
-                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3"/>
-                <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round" />
               </svg>
               Resetting…
             </>
@@ -329,7 +329,7 @@ function ResetPasswordForm() {
         {/* BACK TO LOGIN */}
         <p style={{ textAlign: 'center', fontSize: '13px', color: '#8a7fa0' }}>
           Remembered your password?{' '}
-          <Link href="/auth/login" style={{ color: '#9D00FF', fontWeight: 600, textDecoration: 'none' }}>
+          <Link href="/auth/login" style={{ color: '#111111', fontWeight: 600, textDecoration: 'none' }}>
             Sign in
           </Link>
         </p>
@@ -348,17 +348,17 @@ export default function ResetPasswordPage() {
 
       {/* TOP BAR */}
       <header style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'right',
         padding: '16px 24px', borderBottom: '1px solid rgba(157,0,255,0.08)'
       }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        {/* <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img
             src="/trexasoft_text_purple.png"
             alt="TrexaSoft Logo"
             style={{ height: '32px', width: 'auto' }}
           />
-        </Link>
-        <Link href="/auth/forgot-password" style={{ fontSize: '14px', color: '#9D00FF', fontWeight: 600, textDecoration: 'none' }}>
+        </Link> */}
+        <Link href="/auth/forgot-password" style={{ fontSize: '14px', color: '#111111', fontWeight: 600, textDecoration: 'none' }}>
           ← Back
         </Link>
       </header>

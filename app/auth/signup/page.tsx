@@ -67,19 +67,19 @@ export default function SignupPage() {
 
       {/* TOP BAR */}
       <header style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'right',
         padding: '16px 24px', borderBottom: '1px solid rgba(157,0,255,0.08)'
       }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        {/* <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img
             src="/trexasoft_text_purple.png"
             alt="TrexaSoft Logo"
             style={{ height: '32px', width: 'auto' }}
           />
-        </Link>
+        </Link> */}
         <p style={{ fontSize: '14px', color: '#4a4458' }}>
           Already have an account?{' '}
-          <Link href="/auth/login" style={{ color: '#9D00FF', fontWeight: 600, textDecoration: 'none' }}>
+          <Link href="/auth/login" style={{ color: '#111111', fontWeight: 600, textDecoration: 'none', alignItems: 'center' }}>
             Sign in
           </Link>
         </p>
@@ -137,17 +137,17 @@ export default function SignupPage() {
                 required
                 style={{
                   width: '100%', padding: '11px 14px',
-                  border: '1px solid rgba(157,0,255,0.2)',
+                  border: '1px solid rgba(0,0,0,0.16)',
                   borderRadius: '9px', fontSize: '15px',
                   color: '#0f0a1a', background: '#ffffff',
                   outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
                 }}
                 onFocus={e => {
-                  e.target.style.borderColor = '#9D00FF'
+                  e.target.style.borderColor = '#111111'
                   e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
                 }}
                 onBlur={e => {
-                  e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                  e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                   e.target.style.boxShadow = 'none'
                 }}
               />
@@ -169,17 +169,17 @@ export default function SignupPage() {
                 required
                 style={{
                   width: '100%', padding: '11px 14px',
-                  border: '1px solid rgba(157,0,255,0.2)',
+                  border: '1px solid rgba(0,0,0,0.16)',
                   borderRadius: '9px', fontSize: '15px',
                   color: '#0f0a1a', background: '#ffffff',
                   outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
                 }}
                 onFocus={e => {
-                  e.target.style.borderColor = '#9D00FF'
+                  e.target.style.borderColor = '#111111'
                   e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
                 }}
                 onBlur={e => {
-                  e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                  e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                   e.target.style.boxShadow = 'none'
                 }}
               />
@@ -202,17 +202,17 @@ export default function SignupPage() {
                   required
                   style={{
                     width: '100%', padding: '11px 44px 11px 14px',
-                    border: '1px solid rgba(157,0,255,0.2)',
+                    border: '1px solid rgba(0,0,0,0.16)',
                     borderRadius: '9px', fontSize: '15px',
                     color: '#0f0a1a', background: '#ffffff',
                     outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
                   }}
                   onFocus={e => {
-                    e.target.style.borderColor = '#9D00FF'
+                    e.target.style.borderColor = '#111111'
                     e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
                   }}
                   onBlur={e => {
-                    e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                    e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                     e.target.style.boxShadow = 'none'
                   }}
                 />
@@ -258,11 +258,11 @@ export default function SignupPage() {
               style={{
                 width: '100%', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', gap: '8px',
-                background: loading ? '#c97dff' : '#9D00FF',
+                background: loading ? '#666666' : '#111111',
                 color: '#ffffff', fontSize: '15px', fontWeight: 600,
                 padding: '13px', borderRadius: '10px', border: 'none',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: '0 4px 16px rgba(157,0,255,0.2)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
                 transition: 'opacity 0.15s, transform 0.15s'
               }}
               onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '0.9' }}
@@ -287,11 +287,11 @@ export default function SignupPage() {
             {/* TERMS NOTE */}
             <p style={{ fontSize: '12px', color: '#8a7fa0', lineHeight: 1.6, textAlign: 'center' }}>
               By creating an account you agree to our{' '}
-              <Link href="/terms" style={{ color: '#9D00FF', textDecoration: 'none', fontWeight: 500 }}>
+              <Link href="/terms" style={{ color: '#111111', textDecoration: 'none', fontWeight: 500 }}>
                 Terms of Service
               </Link>{' '}
               and{' '}
-              <Link href="/privacy" style={{ color: '#9D00FF', textDecoration: 'none', fontWeight: 500 }}>
+              <Link href="/privacy" style={{ color: '#111111', textDecoration: 'none', fontWeight: 500 }}>
                 Privacy Policy
               </Link>.
             </p>

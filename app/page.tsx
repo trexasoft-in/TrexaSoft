@@ -7,6 +7,7 @@ import {
   Calendar,
   Code2,
   ArrowRight,
+  ArrowUpRight,
   Mail,
   ExternalLink
 } from 'lucide-react'
@@ -235,10 +236,10 @@ export default function HomePage() {
 
             <div style={{ textAlign: 'center', marginBottom: '56px' }}>
               <span style={{
-                fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em',
+                fontSize: '16pt', fontWeight: 700, letterSpacing: '0.1em',
                 textTransform: 'uppercase', color: '#9D00FF', display: 'inline-block', marginBottom: '12px'
               }}>
-                Ecosystem
+                Products
               </span>
               <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: '#0f0a1a', letterSpacing: '-0.025em' }}>
                 Seamless utilities for productivity
@@ -254,63 +255,120 @@ export default function HomePage() {
               {[
                 {
                   name: 'TrexaFlow',
+                  href: '/products/trexaflow',
                   tag: 'Communication & workflow coordination',
                   desc: 'Bring conversations, tasks, and collaboration into one shared workspace designed for everyday team workflows.',
-                  icon: <MessageSquare size={22} color="#9D00FF" />
+                  icon: (
+                    <img
+                      src="/TrexaFlow_logo_purple.png"
+                      alt="TrexaFlow"
+                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
+                    />
+                  )
                 },
                 {
                   name: 'TrexaMeet',
+                  href: '/products/trexameet',
                   tag: 'Meetings & virtual collaboration',
                   desc: 'A space for teams to connect through video meetings, discussions, and real-time collaboration from anywhere.',
-                  icon: <Video size={22} color="#9D00FF" />
-                },
-                {
-                  name: 'TrexaCal',
-                  tag: 'Scheduling & time organization',
-                  desc: 'Manage events, plans, and schedules through a calendar experience built around everyday coordination and planning.',
-                  icon: <Calendar size={22} color="#9D00FF" />
+                  icon: (
+                    <img
+                      src="TrexaMeet_favicon_purple.png"
+                      alt="TrexaMeet"
+                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
+                    />
+                  )
                 },
                 {
                   name: 'RepoWeave',
+                  href: '/products/repoweave',
                   tag: 'Repository context & code understanding',
                   desc: 'Analyze repositories and structure development context into organized outputs that can be shared across workflows and AI systems.',
-                  icon: <Code2 size={22} color="#9D00FF" />
+                  icon: (
+                    <img
+                      src="/RepoWeave_inappicon_purple.png"
+                      alt="RepoWeave"
+                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
+                    />
+                  )
                 }
               ].map((product) => (
-                <div key={product.name} style={{
-                  background: '#ffffff',
-                  border: '1px solid rgba(157,0,255,0.08)',
-                  borderRadius: '16px', padding: '32px',
-                  display: 'flex', flexDirection: 'column', gap: '16px',
-                  boxShadow: '0 4px 16px rgba(157,0,255,0.02)',
-                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
+                <Link
+                  key={product.name}
+                  href={product.href}
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid rgba(157,0,255,0.08)',
+                    borderRadius: '16px',
+                    padding: '32px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '16px',
+                    boxShadow: '0 4px 16px rgba(157,0,255,0.02)',
+                    transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                    textDecoration: 'none',
+                    color: 'inherit'
+                  }}
                   className="product-card"
                   onMouseEnter={e => {
                     e.currentTarget.style.transform = 'translateY(-4px)'
                     e.currentTarget.style.boxShadow = '0 12px 32px rgba(157,0,255,0.08)'
                     e.currentTarget.style.borderColor = 'rgba(157,0,255,0.2)'
+
+                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
+                    if (indicator) {
+                      indicator.style.transform = 'translate(2px, -2px)'
+                      indicator.style.background = '#f3e6ff'
+                      indicator.style.borderColor = 'rgba(157,0,255,0.22)'
+                    }
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.transform = 'translateY(0)'
                     e.currentTarget.style.boxShadow = '0 4px 16px rgba(157,0,255,0.02)'
                     e.currentTarget.style.borderColor = 'rgba(157,0,255,0.08)'
+
+                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
+                    if (indicator) {
+                      indicator.style.transform = 'translate(0, 0)'
+                      indicator.style.background = '#faf7ff'
+                      indicator.style.borderColor = 'rgba(157,0,255,0.14)'
+                    }
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <div style={{
-                      width: '44px', height: '44px', borderRadius: '10px',
-                      background: '#f3e6ff', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      width: '72px',
+                      height: '72px',
+                      borderRadius: '10px',
+                      background: '',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}>
                       {product.icon}
                     </div>
-                    <span style={{
-                      fontSize: '11px', fontWeight: 600, color: '#8a7fa0',
-                      background: '#f4f0f9', padding: '4px 10px', borderRadius: '99px'
-                    }}>
-                      Ecosystem app
-                    </span>
+
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '999px',
+                        border: '1px solid rgba(157,0,255,0.14)',
+                        background: '#faf7ff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9D00FF',
+                        flexShrink: 0,
+                        transition: 'all 0.2s ease'
+                      }}
+                      className="product-card-indicator"
+                      aria-hidden="true"
+                    >
+                      <ArrowUpRight size={16} strokeWidth={2.2} />
+                    </div>
                   </div>
+
                   <div>
                     <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0f0a1a', marginBottom: '4px' }}>
                       {product.name}
@@ -322,7 +380,7 @@ export default function HomePage() {
                       {product.desc}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

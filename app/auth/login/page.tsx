@@ -48,7 +48,7 @@ function LoginForm() {
       } else {
         const me = await auth_api.get_me(res.access_token)
         set_auth(me.user || me, res.access_token, res.refresh_token)
-        
+
         const user = me?.user || {
           userid: res?.user?.userid || res?.user?.id,
           name: res?.user?.name,
@@ -129,17 +129,17 @@ function LoginForm() {
             required
             style={{
               width: '100%', padding: '11px 14px',
-              border: '1px solid rgba(157,0,255,0.2)',
+              border: '1px solid rgba(0,0,0,0.16)',
               borderRadius: '9px', fontSize: '15px',
               color: '#0f0a1a', background: '#ffffff',
               outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
             }}
             onFocus={e => {
-              e.target.style.borderColor = '#9D00FF'
+              e.target.style.borderColor = '#111111'
               e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
             }}
             onBlur={e => {
-              e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+              e.target.style.borderColor = 'rgba(0,0,0,0.16)'
               e.target.style.boxShadow = 'none'
             }}
           />
@@ -153,7 +153,7 @@ function LoginForm() {
             </label>
             <Link
               href="/auth/forgot-password"
-              style={{ fontSize: '13px', color: '#9D00FF', fontWeight: 500, textDecoration: 'none' }}
+              style={{ fontSize: '13px', color: '#111111', fontWeight: 500, textDecoration: 'none' }}
             >
               Forgot password?
             </Link>
@@ -170,17 +170,17 @@ function LoginForm() {
               required
               style={{
                 width: '100%', padding: '11px 44px 11px 14px',
-                border: '1px solid rgba(157,0,255,0.2)',
+                border: '1px solid rgba(0,0,0,0.16)',
                 borderRadius: '9px', fontSize: '15px',
                 color: '#0f0a1a', background: '#ffffff',
                 outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s'
               }}
               onFocus={e => {
-                e.target.style.borderColor = '#9D00FF'
+                e.target.style.borderColor = '#111111'
                 e.target.style.boxShadow = '0 0 0 3px rgba(157,0,255,0.1)'
               }}
               onBlur={e => {
-                e.target.style.borderColor = 'rgba(157,0,255,0.2)'
+                e.target.style.borderColor = 'rgba(0,0,0,0.16)'
                 e.target.style.boxShadow = 'none'
               }}
             />
@@ -207,11 +207,11 @@ function LoginForm() {
           style={{
             width: '100%', display: 'flex', alignItems: 'center',
             justifyContent: 'center', gap: '8px',
-            background: loading ? '#c97dff' : '#9D00FF',
+            background: loading ? '#666666' : '#111111',
             color: '#ffffff', fontSize: '15px', fontWeight: 600,
             padding: '13px', borderRadius: '10px', border: 'none',
             cursor: loading ? 'not-allowed' : 'pointer',
-            boxShadow: '0 4px 16px rgba(157,0,255,0.2)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
             transition: 'opacity 0.15s'
           }}
           onMouseEnter={e => { if (!loading) e.currentTarget.style.opacity = '0.9' }}
@@ -220,8 +220,8 @@ function LoginForm() {
           {loading ? (
             <>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ animation: 'spin 0.8s linear infinite' }}>
-                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3"/>
-                <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3" />
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round" />
               </svg>
               Signing in…
             </>
@@ -247,19 +247,19 @@ export default function LoginPage() {
 
       {/* TOP BAR */}
       <header style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'right',
         padding: '16px 24px', borderBottom: '1px solid rgba(157,0,255,0.08)'
       }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        {/* <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img
             src="/trexasoft_text_purple.png"
             alt="TrexaSoft Logo"
             style={{ height: '32px', width: 'auto' }}
           />
-        </Link>
+        </Link> */}
         <p style={{ fontSize: '14px', color: '#4a4458' }}>
           No account?{' '}
-          <Link href="/auth/signup" style={{ color: '#9D00FF', fontWeight: 600, textDecoration: 'none' }}>
+          <Link href="/auth/signup" style={{ color: '#111111', fontWeight: 600, textDecoration: 'none' }}>
             Sign up free
           </Link>
         </p>
