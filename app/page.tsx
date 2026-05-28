@@ -255,7 +255,7 @@ export default function HomePage() {
               {[
                 {
                   name: 'TrexaFlow',
-                  href: '/products/trexaflow',
+                  href: 'https://flow.trexasoft.in',
                   tag: 'Communication & workflow coordination',
                   desc: 'Bring conversations, tasks, and collaboration into one shared workspace designed for everyday team workflows.',
                   icon: (
@@ -268,7 +268,7 @@ export default function HomePage() {
                 },
                 {
                   name: 'TrexaMeet',
-                  href: '/products/trexameet',
+                  href: 'https://meet.trexasoft.in',
                   tag: 'Meetings & virtual collaboration',
                   desc: 'A space for teams to connect through video meetings, discussions, and real-time collaboration from anywhere.',
                   icon: (
@@ -281,7 +281,7 @@ export default function HomePage() {
                 },
                 {
                   name: 'RepoWeave',
-                  href: '/products/repoweave',
+                  href: 'https://repoweave.trexasoft.in',
                   tag: 'Repository context & code understanding',
                   desc: 'Analyze repositories and structure development context into organized outputs that can be shared across workflows and AI systems.',
                   icon: (
