@@ -1,15 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   MessageSquare,
   Video,
-  Calendar,
   Code2,
   ArrowRight,
   ArrowUpRight,
   Mail,
-  ExternalLink
+  Sparkles,
+  Users,
+  Layers
 } from 'lucide-react'
 
 // Custom high-quality SVG Brand Icons (since Lucide v1.0+ has removed all brand icons)
@@ -73,6 +75,7 @@ function YoutubeIcon({ size = 18 }: { size?: number }) {
   )
 }
 
+
 export default function HomePage() {
   return (
     <div style={{ background: '#ffffff', color: '#0f0a1a', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -105,12 +108,14 @@ export default function HomePage() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between'
         }}>
           {/* BRAND LOGO */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft Logo"
-              style={{ height: '36px', width: 'auto' }}
-            />
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="TrexaSoft logo">
+              <rect width="32" height="32" rx="8" fill="#9D00FF" />
+              <path d="M8 10h16M16 10v12M11 16h10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontWeight: 700, fontSize: '16px', letterSpacing: '-0.3px', color: '#0f0a1a' }}>
+              TrexaSoft
+            </span>
           </Link>
 
           {/* AUTH CONTEXT LINKS */}
@@ -146,36 +151,36 @@ export default function HomePage() {
         {/* HERO SECTION */}
         <section style={{
           maxWidth: '1200px', margin: '0 auto',
-          padding: 'clamp(80px, 12vw, 60px) 24px clamp(64px, 10vw, 110px)',
+          padding: 'clamp(80px, 12vw, 140px) 24px clamp(64px, 10vw, 96px)',
           textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'
         }}>
-          {/* Large Centered Brand Logo */}
+          {/* Large Centered Logo Image */}
           <div style={{
-            marginBottom: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
+            position: 'relative', width: '96px', height: '96px',
+            background: '#ffffff', border: '1px solid rgba(157,0,255,0.12)',
+            borderRadius: '24px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', marginBottom: '32px',
+            boxShadow: '0 12px 32px rgba(157,0,255,0.08)',
+            overflow: 'hidden', padding: '12px'
           }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft Brand Logo"
-              style={{
-                height: '120px',
-                width: 'auto',
-                filter: 'drop-shadow(0 8px 24px rgba(157, 0, 255, 0.08))'
-              }}
+            <Image
+              src="/logo.png"
+              alt="TrexaSoft Logo"
+              width={72}
+              height={72}
+              style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+              priority
             />
           </div>
 
           {/* Tagline */}
           <h1 style={{
-            fontSize: 'clamp(2rem, 6vw, 2.5rem)',
+            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
             fontWeight: 800, lineHeight: 1.1,
             letterSpacing: '-0.04em', color: '#0f0a1a',
             marginBottom: '24px', maxWidth: '800px'
           }}>
-            {/* Focused tools for <span style={{ color: '#9D00FF' }}>growing teams.</span> */}
-            Focused tools for growing teams.
+            Focused tools for <span style={{ color: '#9D00FF' }}>growing teams.</span>
           </h1>
 
           {/* Description */}
@@ -225,6 +230,59 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* WORKFLOWS & IDEOLOGY SECTION */}
+        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px clamp(64px, 10vw, 96px)' }}>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px', background: '#fafafa', borderRadius: '24px',
+            padding: 'clamp(40px, 6vw, 64px)', border: '1px solid rgba(157,0,255,0.06)'
+          }}>
+            <div>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f0a1a', marginBottom: '16px' }}>
+                Supporting the flow of work
+              </h2>
+              <p style={{ fontSize: '15px', color: '#4a4458', lineHeight: 1.7 }}>
+                Modern work depends on communication, planning, coordination, and access to information. TrexaSoft develops products that support these activities, helping teams stay organized as projects, discussions, and decisions move forward.
+              </p>
+            </div>
+            <div>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f0a1a', marginBottom: '16px' }}>
+                Focused on practical workflows
+              </h2>
+              <p style={{ fontSize: '15px', color: '#4a4458', lineHeight: 1.7 }}>
+                Teams often rely on a collection of tools to communicate, schedule, collaborate, and manage information. TrexaSoft brings together products that support these workflows through a connected and evolving ecosystem.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* PRINCIPLES SECTION */}
+        <section style={{ borderTop: '1px solid rgba(157,0,255,0.06)', padding: 'clamp(64px, 10vw, 96px) 24px' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+              <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: '#0f0a1a', letterSpacing: '-0.025em' }}>
+                Built on simple principles
+              </h2>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
+              {[
+                { title: 'Simplicity', desc: 'Software should be approachable, clear, and easy to use.', icon: <Sparkles size={24} color="#9D00FF" /> },
+                { title: 'Coordination', desc: 'Better visibility and communication help teams stay aligned.', icon: <Users size={24} color="#9D00FF" /> },
+                { title: 'Continuity', desc: 'Workflows should feel connected rather than fragmented.', icon: <Layers size={24} color="#9D00FF" /> }
+              ].map((principle) => (
+                <div key={principle.title} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: '#f3e6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+                    {principle.icon}
+                  </div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0f0a1a', marginBottom: '12px' }}>{principle.title}</h3>
+                  <p style={{ fontSize: '15px', color: '#4a4458', lineHeight: 1.6, maxWidth: '300px' }}>{principle.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* PRODUCTS SECTION */}
         <section id="products" style={{
           background: '#fafafa',
@@ -236,17 +294,17 @@ export default function HomePage() {
 
             <div style={{ textAlign: 'center', marginBottom: '56px' }}>
               <span style={{
-                fontSize: '16pt', fontWeight: 700, letterSpacing: '0.1em',
+                fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em',
                 textTransform: 'uppercase', color: '#9D00FF', display: 'inline-block', marginBottom: '12px'
               }}>
-                Products
+                Our Ecosystem
               </span>
               <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: '#0f0a1a', letterSpacing: '-0.025em' }}>
-                Seamless utilities for productivity
+                Products
               </h2>
             </div>
 
-            {/* 2x2 MODERN PRODUCT GRID */}
+            {/* 3-COLUMN PRODUCT GRID */}
             <div className="products-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -255,120 +313,51 @@ export default function HomePage() {
               {[
                 {
                   name: 'TrexaFlow',
-                  href: 'https://flow.trexasoft.in',
                   tag: 'Communication & workflow coordination',
                   desc: 'Bring conversations, tasks, and collaboration into one shared workspace designed for everyday team workflows.',
-                  icon: (
-                    <img
-                      src="/TrexaFlow_logo_purple.png"
-                      alt="TrexaFlow"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
+                  icon: <MessageSquare size={22} color="#9D00FF" />
                 },
                 {
                   name: 'TrexaMeet',
-                  href: 'https://meet.trexasoft.in',
                   tag: 'Meetings & virtual collaboration',
                   desc: 'A space for teams to connect through video meetings, discussions, and real-time collaboration from anywhere.',
-                  icon: (
-                    <img
-                      src="TrexaMeet_favicon_purple.png"
-                      alt="TrexaMeet"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
+                  icon: <Video size={22} color="#9D00FF" />
                 },
                 {
                   name: 'RepoWeave',
-                  href: 'https://repoweave.trexasoft.in',
                   tag: 'Repository context & code understanding',
                   desc: 'Analyze repositories and structure development context into organized outputs that can be shared across workflows and AI systems.',
-                  icon: (
-                    <img
-                      src="/RepoWeave_inappicon_purple.png"
-                      alt="RepoWeave"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
+                  icon: <Code2 size={22} color="#9D00FF" />
                 }
               ].map((product) => (
-                <Link
-                  key={product.name}
-                  href={product.href}
-                  style={{
-                    background: '#ffffff',
-                    border: '1px solid rgba(157,0,255,0.08)',
-                    borderRadius: '16px',
-                    padding: '32px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                    boxShadow: '0 4px 16px rgba(157,0,255,0.02)',
-                    transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-                    textDecoration: 'none',
-                    color: 'inherit'
-                  }}
+                <div key={product.name} style={{
+                  background: '#ffffff',
+                  border: '1px solid rgba(157,0,255,0.08)',
+                  borderRadius: '16px', padding: '32px',
+                  display: 'flex', flexDirection: 'column', gap: '16px',
+                  boxShadow: '0 4px 16px rgba(157,0,255,0.02)',
+                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
                   className="product-card"
                   onMouseEnter={e => {
                     e.currentTarget.style.transform = 'translateY(-4px)'
                     e.currentTarget.style.boxShadow = '0 12px 32px rgba(157,0,255,0.08)'
                     e.currentTarget.style.borderColor = 'rgba(157,0,255,0.2)'
-
-                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
-                    if (indicator) {
-                      indicator.style.transform = 'translate(2px, -2px)'
-                      indicator.style.background = '#f3e6ff'
-                      indicator.style.borderColor = 'rgba(157,0,255,0.22)'
-                    }
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.transform = 'translateY(0)'
                     e.currentTarget.style.boxShadow = '0 4px 16px rgba(157,0,255,0.02)'
                     e.currentTarget.style.borderColor = 'rgba(157,0,255,0.08)'
-
-                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
-                    if (indicator) {
-                      indicator.style.transform = 'translate(0, 0)'
-                      indicator.style.background = '#faf7ff'
-                      indicator.style.borderColor = 'rgba(157,0,255,0.14)'
-                    }
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div style={{
-                      width: '72px',
-                      height: '72px',
-                      borderRadius: '10px',
-                      background: '',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
+                      width: '44px', height: '44px', borderRadius: '10px',
+                      background: '#f3e6ff', display: 'flex', alignItems: 'center', justifyContent: 'center'
                     }}>
                       {product.icon}
                     </div>
-
-                    <div
-                      style={{
-                        width: '34px',
-                        height: '34px',
-                        borderRadius: '999px',
-                        border: '1px solid rgba(157,0,255,0.14)',
-                        background: '#faf7ff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#9D00FF',
-                        flexShrink: 0,
-                        transition: 'all 0.2s ease'
-                      }}
-                      className="product-card-indicator"
-                      aria-hidden="true"
-                    >
-                      <ArrowUpRight size={16} strokeWidth={2.2} />
-                    </div>
                   </div>
-
                   <div>
                     <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0f0a1a', marginBottom: '4px' }}>
                       {product.name}
@@ -380,15 +369,52 @@ export default function HomePage() {
                       {product.desc}
                     </p>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
+          </div>
+        </section>
 
+        {/* ECOSYSTEM & TEAMS CLOSING SECTION */}
+        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(64px, 10vw, 96px) 24px' }}>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px',
+            alignItems: 'start'
+          }}>
+            <div style={{ padding: '32px', background: '#fcfbfe', borderRadius: '24px', border: '1px solid rgba(157,0,255,0.1)' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0f0a1a', marginBottom: '16px' }}>
+                A growing ecosystem of products
+              </h2>
+              <p style={{ fontSize: '15px', color: '#4a4458', lineHeight: 1.7 }}>
+                TrexaSoft brings together tools for communication, collaboration, scheduling, and development workflows. Each product serves a distinct purpose while contributing to a broader ecosystem designed around the needs of modern teams.
+              </p>
+            </div>
+            <div style={{ padding: '32px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0f0a1a', marginBottom: '16px' }}>
+                Built for growing teams
+              </h2>
+              <p style={{ fontSize: '15px', color: '#4a4458', lineHeight: 1.7, marginBottom: '32px' }}>
+                From independent professionals and project-based teams to growing businesses, TrexaSoft supports the workflows that help work move forward every day.
+              </p>
+              <Link href="/auth/signup" style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                background: '#9D00FF', color: '#ffffff',
+                fontSize: '15px', fontWeight: 600,
+                padding: '12px 24px', borderRadius: '10px',
+                textDecoration: 'none', transition: 'all 0.15s ease'
+              }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+              >
+                Get started free
+                <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* SOCIAL SECTION */}
-        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(64px, 8vw, 96px) 24px', textAlign: 'center' }}>
+        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px clamp(64px, 8vw, 96px)', textAlign: 'center' }}>
           <div style={{ maxWidth: '500px', margin: '0 auto', marginBottom: '32px' }}>
             <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0f0a1a', marginBottom: '8px', letterSpacing: '-0.02em' }}>
               Connect with TrexaSoft
@@ -445,12 +471,12 @@ export default function HomePage() {
           display: 'flex', flexDirection: 'column', gap: '24px',
           alignItems: 'center', textAlign: 'center'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft brand icon"
-              style={{ height: '24px', width: 'auto' }}
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-label="TrexaSoft brand icon">
+              <rect width="32" height="32" rx="8" fill="#9D00FF" />
+              <path d="M8 10h16M16 10v12M11 16h10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontSize: '15px', fontWeight: 700, color: '#0f0a1a' }}>TrexaSoft</span>
           </div>
 
           <p style={{ fontSize: '14px', color: '#4a4458', margin: 0 }}>
