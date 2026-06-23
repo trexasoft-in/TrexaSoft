@@ -1,467 +1,445 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  MessageSquare,
-  Video,
-  Calendar,
-  Code2,
-  ArrowRight,
-  ArrowUpRight,
-  Mail,
-  ExternalLink
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 
-// Custom high-quality SVG Brand Icons (since Lucide v1.0+ has removed all brand icons)
-function GithubIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-    >
-      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+/* ─── Principle icons (inline SVG, no extra deps) ─── */
+const icons = {
+  Simplicity: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
     </svg>
-  )
+  ),
+  Coordination: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  ),
+  Continuity: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="17 1 21 5 17 9" /><path d="M3 11V9a4 4 0 0 1 4-4h14" />
+      <polyline points="7 23 3 19 7 15" /><path d="M21 13v2a4 4 0 0 1-4 4H3" />
+    </svg>
+  ),
+  Focus: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3" /><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+    </svg>
+  ),
 }
 
-function TwitterIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-    >
-      <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
-    </svg>
-  )
-}
+const principles = [
+  { title: 'Simplicity', desc: 'Software should be approachable, clear, and easy to navigate.' },
+  { title: 'Coordination', desc: 'Better communication and visibility help teams stay aligned.' },
+  { title: 'Continuity', desc: 'Workflows should remain connected rather than fragmented.' },
+  { title: 'Focus', desc: 'Every product should have a clear purpose and solve a specific problem.' },
+]
 
-function LinkedinIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-    >
-      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
-    </svg>
-  )
-}
+const products = [
+  {
+    name: 'TrexaFlow',
+    href: 'https://flow.trexasoft.in',
+    tag: 'Communication & workflow coordination',
+    desc: 'Bring conversations, tasks, and collaboration into one shared workspace designed for everyday team workflows.',
+    icon: <img src="/TrexaFlow_logo_purple.png" alt="TrexaFlow" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />,
+  },
+  {
+    name: 'TrexaMeet',
+    href: 'https://meet.trexasoft.in',
+    tag: 'Meetings & virtual collaboration',
+    desc: 'A space for teams to connect through video meetings, discussions, and real-time collaboration from anywhere.',
+    icon: <img src="/TrexaMeet_favicon_purple.png" alt="TrexaMeet" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />,
+  },
+  {
+    name: 'RepoWeave',
+    href: 'https://repoweave.trexasoft.in',
+    tag: 'Repository context & code understanding',
+    desc: 'Analyze repositories and structure development context into organized outputs that can be shared across workflows and AI systems.',
+    icon: <img src="/RepoWeave_inappicon_purple.png" alt="RepoWeave" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />,
+  },
+]
 
-function YoutubeIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      fill="currentColor"
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-    >
-      <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" />
-    </svg>
-  )
-}
+const stats = [
+  { number: '3+', label: 'Products' },
+  { number: '1', label: 'Ecosystem' },
+  { number: '∞', label: 'Workflows' },
+  { number: 'Free', label: 'To get started' },
+]
 
 export default function HomePage() {
   return (
-    <div style={{ background: '#ffffff', color: '#0f0a1a', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <>
+      {/* PAGE-LEVEL STYLES — all scoped to hp- prefix, no conflict with other pages */}
+      <style>{`
+        .hp-skip-link {
+          position: absolute; top: -48px; left: 16px; z-index: 9999;
+          background: #9D00FF; color: #fff; padding: 8px 16px;
+          border-radius: 8px; font-size: 14px; font-weight: 600;
+          transition: top 0.2s; text-decoration: none;
+        }
+        .hp-skip-link:focus { top: 16px; }
 
-      {/* SKIP LINK FOR ACCESSIBILITY */}
-      <a
-        href="#main"
-        style={{
-          position: 'absolute', top: '-40px', left: '16px', zIndex: 9999,
-          background: '#9D00FF', color: '#fff', padding: '8px 16px',
-          borderRadius: '6px', fontSize: '14px', fontWeight: 600,
-          transition: 'top 0.2s', textDecoration: 'none'
-        }}
-        onFocus={e => (e.currentTarget.style.top = '16px')}
-        onBlur={e => (e.currentTarget.style.top = '-40px')}
-      >
-        Skip to content
-      </a>
+        .hp-navbar {
+          position: sticky; top: 0; z-index: 100;
+          background: rgba(255,255,255,0.92);
+          backdrop-filter: blur(16px) saturate(180%);
+          -webkit-backdrop-filter: blur(16px) saturate(180%);
+          border-bottom: 1px solid rgba(157,0,255,0.08);
+        }
+        .hp-navbar-inner {
+          max-width: 1200px; margin: 0 auto;
+          padding: 0 24px; height: 64px;
+          display: flex; align-items: center; justify-content: space-between;
+        }
+        .hp-nav-signin {
+          font-size: 14px; font-weight: 500; color: #4a4458;
+          padding: 8px 16px; border-radius: 8px; text-decoration: none;
+          transition: background 0.15s, color 0.15s;
+        }
+        .hp-nav-signin:hover { background: rgba(157,0,255,0.07); color: #9D00FF; }
+        .hp-nav-cta {
+          font-size: 14px; font-weight: 600; color: #fff;
+          background: #9D00FF; padding: 8px 20px; border-radius: 8px;
+          text-decoration: none;
+          box-shadow: 0 2px 10px rgba(157,0,255,0.28);
+          transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+        }
+        .hp-nav-cta:hover { background: #8200d4; transform: translateY(-1px); box-shadow: 0 4px 18px rgba(157,0,255,0.34); }
 
-      {/* NAVBAR */}
-      <header style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        background: 'rgba(255,255,255,0.95)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(157,0,255,0.08)'
-      }}>
-        <div style={{
-          maxWidth: '1200px', margin: '0 auto',
-          padding: '0 24px', height: '64px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between'
-        }}>
-          {/* BRAND LOGO */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft Logo"
-              style={{ height: '36px', width: 'auto' }}
-            />
-          </Link>
+        .hp-hero {
+          position: relative; overflow: hidden;
+          padding: clamp(80px, 12vw, 96px) 24px clamp(64px, 10vw, 96px);
+          text-align: center; display: flex; flex-direction: column; align-items: center;
+        }
+        .hp-hero::before {
+          content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+          width: 900px; height: 600px; pointer-events: none;
+          background: radial-gradient(ellipse at center, rgba(157,0,255,0.055) 0%, transparent 70%);
+          z-index: 0;
+        }
+        .hp-hero-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .hp-hero-badge {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: rgba(157,0,255,0.07); border: 1px solid rgba(157,0,255,0.18);
+          color: #9D00FF; font-size: 11px; font-weight: 700;
+          letter-spacing: 0.07em; text-transform: uppercase;
+          padding: 5px 14px; border-radius: 99px; margin-bottom: 20px;
+        }
+        .hp-hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #9D00FF; flex-shrink: 0; }
+        .hp-hero-h1 {
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
+          font-weight: 800; line-height: 1.08; letter-spacing: -0.04em;
+          color: #0f0a1a; margin-bottom: 24px; max-width: 760px;
+        }
+        .hp-hero-desc-p { font-size: clamp(1.05rem, 2.5vw, 1.2rem); line-height: 1.75; color: #4a4458; margin-bottom: 16px; max-width: 600px; }
+        .hp-hero-desc-s { font-size: 1rem; line-height: 1.85; color: #6b6477; max-width: 600px; }
+        .hp-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+        .hp-cta-primary {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: #9D00FF; color: #fff;
+          font-size: 15px; font-weight: 700;
+          padding: 14px 32px; border-radius: 12px; text-decoration: none;
+          box-shadow: 0 6px 28px rgba(157,0,255,0.30);
+          transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+        }
+        .hp-cta-primary:hover { background: #8200d4; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(157,0,255,0.38); }
+        .hp-cta-secondary {
+          display: inline-flex; align-items: center; gap: 6px;
+          color: #0f0a1a; font-size: 15px; font-weight: 600;
+          padding: 14px 28px; border-radius: 12px;
+          border: 1.5px solid rgba(157,0,255,0.16); background: #fafafa;
+          text-decoration: none;
+          transition: background 0.15s, border-color 0.15s, transform 0.15s;
+          box-shadow: 0 1px 4px rgba(157,0,255,0.06);
+        }
+        .hp-cta-secondary:hover { background: rgba(157,0,255,0.07); border-color: rgba(157,0,255,0.28); transform: translateY(-1px); }
 
-          {/* AUTH CONTEXT LINKS */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Link href="/auth/login" style={{
-              fontSize: '14px', fontWeight: 500, color: '#4a4458',
-              padding: '8px 16px', borderRadius: '8px',
-              textDecoration: 'none', transition: 'background 0.15s'
-            }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#f4f0f9')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-            >
-              Sign in
+        .hp-statbar {
+          background: #fafafa;
+          border-top: 1px solid rgba(157,0,255,0.06);
+          border-bottom: 1px solid rgba(157,0,255,0.06);
+        }
+        .hp-statbar-inner {
+          max-width: 1200px; margin: 0 auto; padding: 0 24px;
+          display: grid; grid-template-columns: repeat(4, 1fr);
+        }
+        .hp-stat {
+          display: flex; flex-direction: column; align-items: center;
+          gap: 4px; padding: 28px 16px; text-align: center;
+          border-right: 1px solid rgba(157,0,255,0.06);
+        }
+        .hp-stat:last-child { border-right: none; }
+        .hp-stat-number { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #9D00FF; letter-spacing: -0.03em; }
+        .hp-stat-label { font-size: 11px; color: #8a7fa0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; }
+
+        .hp-section { padding: clamp(64px, 8vw, 96px) 24px; }
+        .hp-section-center { max-width: 860px; margin: 0 auto; text-align: center; }
+        .hp-section-label {
+          display: inline-block; font-size: 11px; font-weight: 700;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          color: #9D00FF; margin-bottom: 12px;
+        }
+        .hp-section-h2 {
+          font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 800;
+          color: #0f0a1a; letter-spacing: -0.03em; margin-bottom: 20px;
+        }
+        .hp-section-p { font-size: 1.05rem; line-height: 1.9; color: #4a4458; }
+
+        .hp-principles { background: #fafafa; border-top: 1px solid rgba(157,0,255,0.06); border-bottom: 1px solid rgba(157,0,255,0.06); }
+        .hp-principles-grid {
+          max-width: 1200px; margin: 48px auto 0;
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+        }
+        .hp-principle-card {
+          background: #fff; padding: 28px; border-radius: 16px;
+          border: 1px solid rgba(157,0,255,0.08);
+          position: relative; overflow: hidden;
+          transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+        }
+        .hp-principle-card::before {
+          content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+          background: linear-gradient(90deg, #9D00FF, transparent);
+          opacity: 0; transition: opacity 0.2s;
+        }
+        .hp-principle-card:hover { box-shadow: 0 8px 28px rgba(157,0,255,0.10); transform: translateY(-3px); border-color: rgba(157,0,255,0.18); }
+        .hp-principle-card:hover::before { opacity: 1; }
+        .hp-principle-icon {
+          width: 36px; height: 36px; background: rgba(157,0,255,0.08);
+          border-radius: 10px; display: flex; align-items: center; justify-content: center;
+          color: #9D00FF; margin-bottom: 18px;
+        }
+        .hp-principle-title { font-size: 15px; font-weight: 700; color: #0f0a1a; margin-bottom: 8px; }
+        .hp-principle-desc { font-size: 14px; color: #4a4458; line-height: 1.7; }
+
+        .hp-products { background: #fff; border-top: 1px solid rgba(157,0,255,0.06); }
+        .hp-products-header { max-width: 1200px; margin: 0 auto 48px; text-align: center; }
+        .hp-products-grid {
+          max-width: 1200px; margin: 0 auto;
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+        }
+        .hp-product-card {
+          background: #fafafa; border: 1px solid rgba(157,0,255,0.08); border-radius: 20px;
+          padding: 32px; display: flex; flex-direction: column; gap: 20px;
+          text-decoration: none; color: inherit; position: relative; overflow: hidden;
+          box-shadow: 0 2px 8px rgba(157,0,255,0.03);
+          transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s, border-color 0.2s;
+        }
+        .hp-product-card::after {
+          content: ''; position: absolute; inset: 0; border-radius: inherit;
+          background: linear-gradient(135deg, rgba(157,0,255,0.05) 0%, transparent 55%);
+          opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        .hp-product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(157,0,255,0.13); border-color: rgba(157,0,255,0.22); }
+        .hp-product-card:hover::after { opacity: 1; }
+        .hp-product-top { display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 1; }
+        .hp-product-arrow {
+          width: 36px; height: 36px; border-radius: 99px;
+          border: 1.5px solid rgba(157,0,255,0.16); background: #fff;
+          display: flex; align-items: center; justify-content: center;
+          color: #9D00FF; flex-shrink: 0;
+          transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+        }
+        .hp-product-card:hover .hp-product-arrow { background: #9D00FF; border-color: #9D00FF; color: #fff; transform: translate(2px, -2px); }
+        .hp-product-info { position: relative; z-index: 1; }
+        .hp-product-name { font-size: 18px; font-weight: 700; color: #0f0a1a; margin-bottom: 4px; }
+        .hp-product-tag { font-size: 12px; font-weight: 700; color: #9D00FF; margin-bottom: 10px; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
+        .hp-product-desc { font-size: 14px; line-height: 1.65; color: #4a4458; }
+
+        .hp-footer { border-top: 1px solid rgba(157,0,255,0.08); background: #fafafa; padding: 48px 24px; }
+        .hp-footer-inner {
+          max-width: 1200px; margin: 0 auto;
+          display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center;
+        }
+        .hp-footer-tagline { font-size: 14px; color: #4a4458; }
+        .hp-footer-copy { font-size: 13px; color: #8a7fa0; }
+
+        @media (max-width: 640px) {
+          .hp-statbar-inner { grid-template-columns: repeat(2, 1fr); }
+          .hp-stat:nth-child(2) { border-right: none; }
+          .hp-stat:nth-child(3), .hp-stat:nth-child(4) { border-top: 1px solid rgba(157,0,255,0.06); }
+        }
+        @media (max-width: 400px) {
+          .hp-statbar-inner { grid-template-columns: 1fr; }
+          .hp-stat { border-right: none !important; border-top: 1px solid rgba(157,0,255,0.06); }
+          .hp-stat:first-child { border-top: none; }
+        }
+      `}</style>
+
+      <div style={{ background: '#ffffff', color: '#0f0a1a', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+
+        {/* SKIP LINK */}
+        <a href="#main" className="hp-skip-link">Skip to content</a>
+
+        {/* NAVBAR */}
+        <header className="hp-navbar" role="banner">
+          <div className="hp-navbar-inner">
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} aria-label="TrexaSoft home">
+              <img src="/trexasoft_text_purple.png" alt="TrexaSoft" style={{ height: '34px', width: 'auto' }} />
             </Link>
-            <Link href="/auth/signup" style={{
-              fontSize: '14px', fontWeight: 600, color: '#ffffff',
-              background: '#9D00FF', padding: '8px 20px',
-              borderRadius: '8px', textDecoration: 'none',
-              transition: 'opacity 0.15s'
-            }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-            >
-              Get started
-            </Link>
-          </nav>
-        </div>
-      </header>
-
-      {/* MAIN CONTAINER */}
-      <main id="main" style={{ flex: 1 }}>
-
-        {/* HERO SECTION */}
-        <section style={{
-          maxWidth: '1200px', margin: '0 auto',
-          padding: 'clamp(80px, 12vw, 60px) 24px clamp(64px, 10vw, 110px)',
-          textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'
-        }}>
-          {/* Large Centered Brand Logo */}
-          <div style={{
-            marginBottom: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft Brand Logo"
-              style={{
-                height: '120px',
-                width: 'auto',
-                filter: 'drop-shadow(0 8px 24px rgba(157, 0, 255, 0.08))'
-              }}
-            />
+            <nav style={{ display: 'flex', alignItems: 'center', gap: '6px' }} aria-label="Main navigation">
+              <Link href="/auth/login" className="hp-nav-signin">Sign in</Link>
+              <Link href="/auth/signup" className="hp-nav-cta">Get started</Link>
+            </nav>
           </div>
+        </header>
 
-          {/* Tagline */}
-          <h1 style={{
-            fontSize: 'clamp(2rem, 6vw, 2.5rem)',
-            fontWeight: 800, lineHeight: 1.1,
-            letterSpacing: '-0.04em', color: '#0f0a1a',
-            marginBottom: '24px', maxWidth: '800px'
-          }}>
-            {/* Focused tools for <span style={{ color: '#9D00FF' }}>growing teams.</span> */}
-            Focused tools for growing teams.
-          </h1>
+        {/* MAIN */}
+        <main id="main" style={{ flex: 1 }}>
 
-          {/* Description */}
-          <p style={{
-            fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)',
-            lineHeight: 1.6, color: '#4a4458',
-            marginBottom: '40px', maxWidth: '640px'
-          }}>
-            Tools built around the way teams communicate, organize, and work together through simpler and more connected workflows.
-          </p>
-
-          {/* CTA Buttons */}
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link href="/auth/signup" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: '#9D00FF', color: '#ffffff',
-              fontSize: '15px', fontWeight: 600,
-              padding: '14px 32px', borderRadius: '10px',
-              textDecoration: 'none',
-              boxShadow: '0 4px 24px rgba(157,0,255,0.25)',
-              transition: 'all 0.15s ease'
-            }}
-              onMouseEnter={e => {
-                e.currentTarget.style.opacity = '0.9';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              Create free account
-              <ArrowRight size={16} />
-            </Link>
-            <Link href="#products" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '6px',
-              color: '#0f0a1a', fontSize: '15px', fontWeight: 600,
-              padding: '14px 28px', borderRadius: '10px',
-              border: '1px solid #e8e0f0', background: '#fafafa',
-              textDecoration: 'none', transition: 'all 0.15s ease'
-            }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#f4f0f9')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#fafafa')}
-            >
-              Explore products
-            </Link>
-          </div>
-        </section>
-
-        {/* PRODUCTS SECTION */}
-        <section id="products" style={{
-          background: '#fafafa',
-          borderTop: '1px solid rgba(157,0,255,0.06)',
-          borderBottom: '1px solid rgba(157,0,255,0.06)',
-          padding: 'clamp(64px, 10vw, 96px) 24px'
-        }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-
-            <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-              <span style={{
-                fontSize: '16pt', fontWeight: 700, letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: '#9D00FF', display: 'inline-block', marginBottom: '12px'
-              }}>
-                Products
-              </span>
-              <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: '#0f0a1a', letterSpacing: '-0.025em' }}>
-                Seamless utilities for productivity
-              </h2>
+          {/* HERO */}
+          <section className="hp-hero" aria-label="Hero">
+            <div className="hp-hero-inner">
+              <div style={{ marginBottom: '32px' }}>
+                <img
+                  src="/trexasoft_text_purple.png"
+                  alt="TrexaSoft"
+                  style={{ height: '96px', width: 'auto', filter: 'drop-shadow(0 8px 28px rgba(157,0,255,0.10))' }}
+                />
+              </div>
+              <div className="hp-hero-badge">
+                <span className="hp-hero-badge-dot" />
+                Productivity suite for modern teams
+              </div>
+              <h1 className="hp-hero-h1">Focused tools for growing teams.</h1>
+              <p className="hp-hero-desc-p">
+                Tools built around the way teams communicate, organize, and work together through simpler and more connected workflows.
+              </p>
+              <p className="hp-hero-desc-s">
+                From planning and coordination to meetings and development workflows,
+                TrexaSoft supports the activities that shape how teams collaborate every day.
+                Each product is designed around a specific purpose while contributing to a
+                broader ecosystem of connected experiences.
+              </p>
+              <div className="hp-hero-ctas">
+                <Link href="/auth/signup" className="hp-cta-primary">
+                  Create free account
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+                <Link href="#products" className="hp-cta-secondary">
+                  Explore products
+                </Link>
+              </div>
             </div>
+          </section>
 
-            {/* 2x2 MODERN PRODUCT GRID */}
-            <div className="products-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '24px'
-            }}>
-              {[
-                {
-                  name: 'TrexaFlow',
-                  href: 'https://flow.trexasoft.in',
-                  tag: 'Communication & workflow coordination',
-                  desc: 'Bring conversations, tasks, and collaboration into one shared workspace designed for everyday team workflows.',
-                  icon: (
-                    <img
-                      src="/TrexaFlow_logo_purple.png"
-                      alt="TrexaFlow"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
-                },
-                {
-                  name: 'TrexaMeet',
-                  href: 'https://meet.trexasoft.in',
-                  tag: 'Meetings & virtual collaboration',
-                  desc: 'A space for teams to connect through video meetings, discussions, and real-time collaboration from anywhere.',
-                  icon: (
-                    <img
-                      src="TrexaMeet_favicon_purple.png"
-                      alt="TrexaMeet"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
-                },
-                {
-                  name: 'RepoWeave',
-                  href: 'https://repoweave.trexasoft.in',
-                  tag: 'Repository context & code understanding',
-                  desc: 'Analyze repositories and structure development context into organized outputs that can be shared across workflows and AI systems.',
-                  icon: (
-                    <img
-                      src="/RepoWeave_inappicon_purple.png"
-                      alt="RepoWeave"
-                      style={{ width: '72px', height: '72px', objectFit: 'contain' }}
-                    />
-                  )
-                }
-              ].map((product) => (
+          {/* STAT BAR */}
+          <div className="hp-statbar" role="presentation">
+            <div className="hp-statbar-inner">
+              {stats.map((s) => (
+                <div key={s.label} className="hp-stat">
+                  <span className="hp-stat-number">{s.number}</span>
+                  <span className="hp-stat-label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* SUPPORTING THE FLOW */}
+          <section className="hp-section" style={{ background: '#ffffff' }} aria-label="Supporting the flow of work">
+            <div className="hp-section-center">
+              <span className="hp-section-label">Philosophy</span>
+              <h2 className="hp-section-h2">Supporting the flow of work</h2>
+              <p className="hp-section-p">
+                Modern work depends on communication, planning, coordination, and access
+                to information. TrexaSoft develops products that support these activities,
+                helping teams stay organized as projects, discussions, and decisions move
+                forward.
+              </p>
+            </div>
+          </section>
+
+          {/* PRINCIPLES */}
+          <section className={`hp-section hp-principles`} aria-label="Principles">
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <div style={{ textAlign: 'center' }}>
+                <span className="hp-section-label">Our approach</span>
+                <h2 className="hp-section-h2">Built on simple principles</h2>
+              </div>
+              <div className="hp-principles-grid">
+                {principles.map((item) => (
+                  <div key={item.title} className="hp-principle-card">
+                    <div className="hp-principle-icon">{icons[item.title as keyof typeof icons]}</div>
+                    <p className="hp-principle-title">{item.title}</p>
+                    <p className="hp-principle-desc">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* PRODUCTS */}
+          <section id="products" className={`hp-section hp-products`} aria-label="Products">
+            <div className="hp-products-header">
+              <span className="hp-section-label">Products</span>
+              <h2 className="hp-section-h2">Seamless utilities for productivity</h2>
+            </div>
+            <div className="hp-products-grid">
+              {products.map((product) => (
                 <Link
                   key={product.name}
                   href={product.href}
-                  style={{
-                    background: '#ffffff',
-                    border: '1px solid rgba(157,0,255,0.08)',
-                    borderRadius: '16px',
-                    padding: '32px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                    boxShadow: '0 4px 16px rgba(157,0,255,0.02)',
-                    transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-                    textDecoration: 'none',
-                    color: 'inherit'
-                  }}
-                  className="product-card"
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-4px)'
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(157,0,255,0.08)'
-                    e.currentTarget.style.borderColor = 'rgba(157,0,255,0.2)'
-
-                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
-                    if (indicator) {
-                      indicator.style.transform = 'translate(2px, -2px)'
-                      indicator.style.background = '#f3e6ff'
-                      indicator.style.borderColor = 'rgba(157,0,255,0.22)'
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(157,0,255,0.02)'
-                    e.currentTarget.style.borderColor = 'rgba(157,0,255,0.08)'
-
-                    const indicator = e.currentTarget.querySelector('.product-card-indicator') as HTMLDivElement | null
-                    if (indicator) {
-                      indicator.style.transform = 'translate(0, 0)'
-                      indicator.style.background = '#faf7ff'
-                      indicator.style.borderColor = 'rgba(157,0,255,0.14)'
-                    }
-                  }}
+                  className="hp-product-card"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                    <div style={{
-                      width: '72px',
-                      height: '72px',
-                      borderRadius: '10px',
-                      background: '',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
+                  <div className="hp-product-top">
+                    <div style={{ width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {product.icon}
                     </div>
-
-                    <div
-                      style={{
-                        width: '34px',
-                        height: '34px',
-                        borderRadius: '999px',
-                        border: '1px solid rgba(157,0,255,0.14)',
-                        background: '#faf7ff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#9D00FF',
-                        flexShrink: 0,
-                        transition: 'all 0.2s ease'
-                      }}
-                      className="product-card-indicator"
-                      aria-hidden="true"
-                    >
+                    <div className="hp-product-arrow" aria-hidden="true">
                       <ArrowUpRight size={16} strokeWidth={2.2} />
                     </div>
                   </div>
-
-                  <div>
-                    <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0f0a1a', marginBottom: '4px' }}>
-                      {product.name}
-                    </h3>
-                    <p style={{ fontSize: '13px', fontWeight: 600, color: '#9D00FF', marginBottom: '12px', lineHeight: 1.4 }}>
-                      {product.tag}
-                    </p>
-                    <p style={{ fontSize: '14px', lineHeight: 1.6, color: '#4a4458' }}>
-                      {product.desc}
-                    </p>
+                  <div className="hp-product-info">
+                    <p className="hp-product-name">{product.name}</p>
+                    <p className="hp-product-tag">{product.tag}</p>
+                    <p className="hp-product-desc">{product.desc}</p>
                   </div>
                 </Link>
               ))}
             </div>
+          </section>
 
+          {/* ECOSYSTEM */}
+          <section className="hp-section" style={{ background: '#fafafa', borderTop: '1px solid rgba(157,0,255,0.06)' }} aria-label="Ecosystem">
+            <div className="hp-section-center">
+              <span className="hp-section-label">Ecosystem</span>
+              <h2 className="hp-section-h2">A growing ecosystem of products</h2>
+              <p className="hp-section-p">
+                TrexaSoft brings together tools for communication, collaboration,
+                scheduling, and development workflows. Each product serves a distinct
+                purpose while contributing to a broader ecosystem designed around the
+                needs of modern teams.
+              </p>
+            </div>
+          </section>
+
+          {/* BUILT FOR GROWING TEAMS */}
+          <section className="hp-section" style={{ background: '#ffffff', borderTop: '1px solid rgba(157,0,255,0.06)' }} aria-label="Built for growing teams">
+            <div className="hp-section-center">
+              <span className="hp-section-label">Who it&apos;s for</span>
+              <h2 className="hp-section-h2">Built for growing teams</h2>
+              <p className="hp-section-p">
+                From independent professionals and project-based teams to growing
+                businesses, TrexaSoft supports the workflows that help work move forward
+                every day.
+              </p>
+            </div>
+          </section>
+
+        </main>
+
+        {/* FOOTER */}
+        <footer className="hp-footer">
+          <div className="hp-footer-inner">
+            <img src="/trexasoft_text_purple.png" alt="TrexaSoft" style={{ height: '22px', width: 'auto' }} />
+            <p className="hp-footer-tagline">Focused tools for growing teams.</p>
+            <p className="hp-footer-copy">&copy; {new Date().getFullYear()} TrexaSoft. All rights reserved.</p>
           </div>
-        </section>
+        </footer>
 
-        {/* SOCIAL SECTION */}
-        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(64px, 8vw, 96px) 24px', textAlign: 'center' }}>
-          <div style={{ maxWidth: '500px', margin: '0 auto', marginBottom: '32px' }}>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0f0a1a', marginBottom: '8px', letterSpacing: '-0.02em' }}>
-              Connect with TrexaSoft
-            </h2>
-            <p style={{ fontSize: '14px', color: '#4a4458', lineHeight: 1.6 }}>
-              Updates, projects, and product developments across the TrexaSoft ecosystem.
-            </p>
-          </div>
-
-          {/* Minimal Icon Row */}
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {[
-              { label: 'GitHub', icon: <GithubIcon size={18} />, url: 'https://github.com' },
-              { label: 'LinkedIn', icon: <LinkedinIcon size={18} />, url: 'https://linkedin.com' },
-              { label: 'X (Twitter)', icon: <TwitterIcon size={18} />, url: 'https://x.com' },
-              { label: 'YouTube', icon: <YoutubeIcon size={18} />, url: 'https://youtube.com' },
-              { label: 'Email / Contact', icon: <Mail size={18} />, url: 'mailto:contact@trexasoft.com' }
-            ].map(social => (
-              <a
-                key={social.label}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={social.label}
-                style={{
-                  width: '46px', height: '46px', borderRadius: '50%',
-                  border: '1px solid #e8e0f0', background: '#ffffff',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#4a4458', transition: 'all 0.15s ease', textDecoration: 'none'
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.color = '#9D00FF'
-                  e.currentTarget.style.borderColor = '#9D00FF'
-                  e.currentTarget.style.background = '#f3e6ff'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.color = '#4a4458'
-                  e.currentTarget.style.borderColor = '#e8e0f0'
-                  e.currentTarget.style.background = '#ffffff'
-                }}
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-        </section>
-
-      </main>
-
-      {/* FOOTER */}
-      <footer style={{ borderTop: '1px solid rgba(157,0,255,0.08)', background: '#fafafa', padding: '48px 24px' }}>
-        <div style={{
-          maxWidth: '1200px', margin: '0 auto',
-          display: 'flex', flexDirection: 'column', gap: '24px',
-          alignItems: 'center', textAlign: 'center'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src="/trexasoft_text_purple.png"
-              alt="TrexaSoft brand icon"
-              style={{ height: '24px', width: 'auto' }}
-            />
-          </div>
-
-          <p style={{ fontSize: '14px', color: '#4a4458', margin: 0 }}>
-            Focused tools for growing teams.
-          </p>
-
-          <p style={{ fontSize: '13px', color: '#8a7fa0', margin: 0 }}>
-            &copy; {new Date().getFullYear()} TrexaSoft. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </>
   )
 }
